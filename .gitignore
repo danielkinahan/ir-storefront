@@ -2,6 +2,8 @@
 gql/
 
 .env
+common.env
+backend.env
 
 # dependencies
 /node_modules
