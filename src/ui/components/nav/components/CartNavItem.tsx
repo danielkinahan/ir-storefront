@@ -10,10 +10,10 @@ export const CartNavItem = async ({ channel }: { channel: string }) => {
 	return (
 		<LinkWithChannel
 			href="/cart"
-			className="relative flex items-center text-neutral-500"
+			className="inline-flex items-center border-b-2 border-transparent pt-px text-sm font-medium text-neutral-500 hover:text-neutral-700"
 			data-testid="CartNavItem"
 		>
-			<span className="text-sm font-medium">Cart{lineCount > 0 ? `(${lineCount})` : ""}</span>
+			<span>Cart{lineCount > 0 ? `(${lineCount})` : ""}</span>
 			<span className="sr-only">
 				{lineCount} item{lineCount !== 1 ? "s" : ""} in cart, view bag
 			</span>
