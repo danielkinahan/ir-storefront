@@ -49,3 +49,7 @@ pnpm run generate
 ### Preview content changes instantly (Draft Mode)
 
 Visit `http://{your-host}/api/draft` to enable cookies that disable caching to preview catalog and content changes instantly. [Learn more about the Draft Mode in Next.js docs.](https://nextjs.org/docs/app/building-your-application/configuring/draft-mode)
+
+### TODO
+
+-[ ] Navbar items are text, commas between each -[ ] Remove background from navbar -[ ] Footer is flat, with text links seperated by commas alligned left -[ ] Footer right side is land acknowledgement -[ ] Landing page is a large slide show with nav arrows
