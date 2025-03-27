@@ -52,4 +52,4 @@ Visit `http://{your-host}/api/draft` to enable cookies that disable caching to p
 
 ### TODO
 
--[ ] Navbar items are text, commas between each -[ ] Remove background from navbar -[ ] Footer is flat, with text links seperated by commas alligned left -[ ] Footer right side is land acknowledgement -[ ] Landing page is a large slide show with nav arrows
+-[ ] Navbar items are text, commas between each -[ ] Footer is flat, with text links seperated by commas alligned left -[ ] Footer right side is land acknowledgement -[ ] Landing page is a large slide show with nav arrows
