@@ -8,10 +8,8 @@ export const NavLinks = async ({ channel }: { channel: string }) => {
 		variables: { slug: "navbar", channel },
 		revalidate: 60 * 60 * 24,
 	});
-
 	return (
 		<>
-			<NavLink href="/products">All</NavLink>
 			{navLinks.menu?.items?.map((item) => {
 				if (item.category) {
 					return (
@@ -43,6 +41,7 @@ export const NavLinks = async ({ channel }: { channel: string }) => {
 				}
 				return null;
 			})}
+			<NavLink href="/products">All</NavLink>
 		</>
 	);
 };
