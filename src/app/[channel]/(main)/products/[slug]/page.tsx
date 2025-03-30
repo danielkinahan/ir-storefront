@@ -10,9 +10,113 @@ import { VariantSelector } from "@/ui/components/VariantSelector";
 import { ProductImageWrapper } from "@/ui/atoms/ProductImageWrapper";
 import { executeGraphQL } from "@/lib/graphql";
 import { formatMoney, formatMoneyRange } from "@/lib/utils";
-import { CheckoutAddLineDocument, ProductDetailsDocument, ProductListDocument } from "@/gql/graphql";
+import {
+	CheckoutAddLineDocument,
+	type ProductDetailsQueryVariables,
+	ProductListDocument,
+	TypedDocumentString,
+} from "@/gql/graphql";
 import * as Checkout from "@/lib/checkout";
 import { AvailabilityMessage } from "@/ui/components/AvailabilityMessage";
+
+export type ProductDetailsQuery = {
+	__typename?: "Query";
+	product?: {
+		__typename?: "Product";
+		id: string;
+		name: string;
+		slug: string;
+		description?: string | null;
+		seoTitle?: string | null;
+		seoDescription?: string | null;
+		thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+		media?: Array<{ __typename?: "Image"; url: string; alt?: string | null }> | null;
+		category?: { __typename?: "Category"; id: string; name: string } | null;
+		variants?: Array<{
+			__typename?: "ProductVariant";
+			id: string;
+			name: string;
+			quantityAvailable?: number | null;
+			pricing?: {
+				__typename?: "VariantPricingInfo";
+				price?: {
+					__typename?: "TaxedMoney";
+					gross: { __typename?: "Money"; currency: string; amount: number };
+				} | null;
+			} | null;
+		}> | null;
+		pricing?: {
+			__typename?: "ProductPricingInfo";
+			priceRange?: {
+				__typename?: "TaxedMoneyRange";
+				start?: {
+					__typename?: "TaxedMoney";
+					gross: { __typename?: "Money"; amount: number; currency: string };
+				} | null;
+				stop?: {
+					__typename?: "TaxedMoney";
+					gross: { __typename?: "Money"; amount: number; currency: string };
+				} | null;
+			} | null;
+		} | null;
+	} | null;
+};
+
+export const ProductDetailsDocument = new TypedDocumentString(`
+	query ProductDetails($slug: String!, $channel: String!) {
+  product(slug: $slug, channel: $channel) {
+	id
+	name
+	slug
+	description
+	seoTitle
+	seoDescription
+	thumbnail(size: 1024, format: WEBP) {
+	  url
+	  alt
+	}
+	media{
+      url
+	  alt
+    }
+	category {
+	  id
+	  name
+	}
+	variants {
+	  ...VariantDetails
+	}
+	pricing {
+	  priceRange {
+		start {
+		  gross {
+			amount
+			currency
+		  }
+		}
+		stop {
+		  gross {
+			amount
+			currency
+		  }
+		}
+	  }
+	}
+  }
+}
+	fragment VariantDetails on ProductVariant {
+  id
+  name
+  quantityAvailable
+  pricing {
+	price {
+	  gross {
+		currency
+		amount
+	  }
+	}
+  }
+}`) as unknown as TypedDocumentString<ProductDetailsQuery, ProductDetailsQueryVariables>;
 
 export async function generateMetadata(
 	{
@@ -56,7 +160,7 @@ export async function generateMetadata(
 							alt: product.name,
 						},
 					],
-			  }
+				}
 			: null,
 	};
 }
@@ -93,7 +197,6 @@ export default async function Page({
 		notFound();
 	}
 
-	const firstImage = product.thumbnail;
 	const description = product?.description ? parser.parse(JSON.parse(product?.description)) : null;
 
 	const variants = product.variants;
@@ -132,11 +235,11 @@ export default async function Page({
 	const price = selectedVariant?.pricing?.price?.gross
 		? formatMoney(selectedVariant.pricing.price.gross.amount, selectedVariant.pricing.price.gross.currency)
 		: isAvailable
-		  ? formatMoneyRange({
+			? formatMoneyRange({
 					start: product?.pricing?.priceRange?.start?.gross,
 					stop: product?.pricing?.priceRange?.stop?.gross,
-		    })
-		  : "";
+				})
+			: "";
 
 	const productJsonLd: WithContext<Product> = {
 		"@context": "https://schema.org",
@@ -154,7 +257,7 @@ export default async function Page({
 						priceCurrency: selectedVariant.pricing?.price?.gross.currency,
 						price: selectedVariant.pricing?.price?.gross.amount,
 					},
-			  }
+				}
 			: {
 					name: product.name,
 
@@ -168,7 +271,7 @@ export default async function Page({
 						lowPrice: product.pricing?.priceRange?.start?.gross.amount,
 						highPrice: product.pricing?.priceRange?.stop?.gross.amount,
 					},
-			  }),
+				}),
 	};
 
 	return (
@@ -180,16 +283,18 @@ export default async function Page({
 				}}
 			/>
 			<form className="grid gap-2 sm:grid-cols-2 lg:grid-cols-8" action={addItem}>
-				<div className="md:col-span-1 lg:col-span-5">
-					{firstImage && (
+				<div className="slider-container md:hidden">Add a carousel here</div>
+				<div className="hidden md:col-span-1 md:block lg:col-span-5">
+					{product.media?.map((image: { url: string; alt?: string | null }) => (
 						<ProductImageWrapper
+							key={image.url}
 							priority={true}
-							alt={firstImage.alt ?? ""}
+							alt={image.alt ?? ""}
 							width={1024}
 							height={1024}
-							src={firstImage.url}
+							src={image.url}
 						/>
-					)}
+					))}
 				</div>
 				<div className="flex flex-col pt-6 sm:col-span-1 sm:px-6 sm:pt-0 lg:col-span-3 lg:pt-16">
 					<div>
