@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Cormorant_Garamond } from "next/font/google";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./globals.css";
@@ -6,7 +6,7 @@ import { type ReactNode } from "react";
 import { type Metadata } from "next";
 import { DraftModeNotification } from "@/ui/components/DraftModeNotification";
 
-const inter = Inter({ subsets: ["latin"] });
+const coromorantGaramond = Cormorant_Garamond({ subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
 	title: "Saleor Storefront example",
@@ -20,8 +20,8 @@ export default function RootLayout(props: { children: ReactNode }) {
 	const { children } = props;
 
 	return (
-		<html lang="en" className="min-h-dvh">
-			<body className={`${inter.className} min-h-dvh`}>
+		<html lang="en" className="min-h-dvh bg-white">
+			<body className={`${coromorantGaramond.className} min-h-dvh`}>
 				{children}
 				<DraftModeNotification />
 			</body>
