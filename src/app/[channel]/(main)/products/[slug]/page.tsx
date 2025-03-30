@@ -10,113 +10,10 @@ import { VariantSelector } from "@/ui/components/VariantSelector";
 import { ProductImageWrapper } from "@/ui/atoms/ProductImageWrapper";
 import { executeGraphQL } from "@/lib/graphql";
 import { formatMoney, formatMoneyRange } from "@/lib/utils";
-import {
-	CheckoutAddLineDocument,
-	type ProductDetailsQueryVariables,
-	ProductListDocument,
-	TypedDocumentString,
-} from "@/gql/graphql";
+import { CheckoutAddLineDocument, ProductDetailsDocument, ProductListDocument } from "@/gql/graphql";
 import * as Checkout from "@/lib/checkout";
 import { AvailabilityMessage } from "@/ui/components/AvailabilityMessage";
-
-export type ProductDetailsQuery = {
-	__typename?: "Query";
-	product?: {
-		__typename?: "Product";
-		id: string;
-		name: string;
-		slug: string;
-		description?: string | null;
-		seoTitle?: string | null;
-		seoDescription?: string | null;
-		thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
-		media?: Array<{ __typename?: "Image"; url: string; alt?: string | null }> | null;
-		category?: { __typename?: "Category"; id: string; name: string } | null;
-		variants?: Array<{
-			__typename?: "ProductVariant";
-			id: string;
-			name: string;
-			quantityAvailable?: number | null;
-			pricing?: {
-				__typename?: "VariantPricingInfo";
-				price?: {
-					__typename?: "TaxedMoney";
-					gross: { __typename?: "Money"; currency: string; amount: number };
-				} | null;
-			} | null;
-		}> | null;
-		pricing?: {
-			__typename?: "ProductPricingInfo";
-			priceRange?: {
-				__typename?: "TaxedMoneyRange";
-				start?: {
-					__typename?: "TaxedMoney";
-					gross: { __typename?: "Money"; amount: number; currency: string };
-				} | null;
-				stop?: {
-					__typename?: "TaxedMoney";
-					gross: { __typename?: "Money"; amount: number; currency: string };
-				} | null;
-			} | null;
-		} | null;
-	} | null;
-};
-
-export const ProductDetailsDocument = new TypedDocumentString(`
-	query ProductDetails($slug: String!, $channel: String!) {
-  product(slug: $slug, channel: $channel) {
-	id
-	name
-	slug
-	description
-	seoTitle
-	seoDescription
-	thumbnail(size: 1024, format: WEBP) {
-	  url
-	  alt
-	}
-	media{
-      url
-	  alt
-    }
-	category {
-	  id
-	  name
-	}
-	variants {
-	  ...VariantDetails
-	}
-	pricing {
-	  priceRange {
-		start {
-		  gross {
-			amount
-			currency
-		  }
-		}
-		stop {
-		  gross {
-			amount
-			currency
-		  }
-		}
-	  }
-	}
-  }
-}
-	fragment VariantDetails on ProductVariant {
-  id
-  name
-  quantityAvailable
-  pricing {
-	price {
-	  gross {
-		currency
-		amount
-	  }
-	}
-  }
-}`) as unknown as TypedDocumentString<ProductDetailsQuery, ProductDetailsQueryVariables>;
+import { CarouselWrapper } from "@/ui/components/CarouselWrapper";
 
 export async function generateMetadata(
 	{
@@ -282,8 +179,10 @@ export default async function Page({
 					__html: JSON.stringify(productJsonLd),
 				}}
 			/>
-			<form className="grid gap-2 sm:grid-cols-2 lg:grid-cols-8" action={addItem}>
-				<div className="slider-container md:hidden">Add a carousel here</div>
+			<form className="grid gap-2 md:grid-cols-2 lg:grid-cols-8" action={addItem}>
+				<div className="min-h-0 min-w-0 md:hidden">
+					{product.media && <CarouselWrapper media={product.media} />}
+				</div>
 				<div className="hidden md:col-span-1 md:block lg:col-span-5">
 					{product.media?.map((image: { url: string; alt?: string | null }) => (
 						<ProductImageWrapper
