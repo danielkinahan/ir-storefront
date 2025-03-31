@@ -33,6 +33,7 @@ ENV NEXT_PUBLIC_STOREFRONT_URL=${NEXT_PUBLIC_STOREFRONT_URL}
 # Get PNPM version from package.json
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
+ENV NEXT_SHARP_PATH=/app/node_modules/sharp
 RUN corepack enable
 
 RUN pnpm build

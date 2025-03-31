@@ -1,11 +1,12 @@
 services:
   frontend:
-    image: ghcr.io/danielkinahan/ir-frontend:latest
+    image: ghcr.io/danielkinahan/ir-storefront:latest
     container_name: ir-frontend
     restart: always
     networks:
       - ir
       - caddy
+
   api:
     image: ghcr.io/saleor/saleor:3.20
     container_name: ir-backend
@@ -17,11 +18,10 @@ services:
       - redis
     volumes:
       # shared volume between worker and api for media
-      - ./media:/app/media
+      - ./media:/app/media:z
     env_file:
       - common.env
       - backend.env
-      - api.env
     networks:
       - ir
       - caddy
@@ -30,6 +30,8 @@ services:
     image: ghcr.io/saleor/saleor-dashboard:3.20
     container_name: ir-dashboard
     restart: always
+    env_file:
+      - dashboard.env
     networks:
       - caddy
 
@@ -38,8 +40,8 @@ services:
     container_name: ir-db
     restart: always
     volumes:
-      - ./data:/var/lib/postgresql/data
-      - ./replica_user.sql:/docker-entrypoint-initdb.d/replica_user.sql
+      - ./data:/var/lib/postgresql/data:Z
+      - ./replica_user.sql:/docker-entrypoint-initdb.d/replica_user.sql:Z
     env_file:
       - db.env
     networks:
@@ -50,7 +52,7 @@ services:
     container_name: ir-redis
     restart: always
     volumes:
-      - ./redis:/data
+      - ./redis:/data:Z
     networks:
       - ir
 
@@ -66,7 +68,7 @@ services:
       - redis
     volumes:
       # shared volume between worker and api for media
-      - ./media:/app/media
+      - ./media:/app/media:z
     networks:
       - ir
 
