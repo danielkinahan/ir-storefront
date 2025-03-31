@@ -22,6 +22,9 @@ jobs:
           tags: ${{ github.ref_name }} ${{ github.sha }} latest
           containerfiles: |
             ./Containerfile
+          build-args: |
+            NEXT_PUBLIC_SALEOR_API_URL=${{ secrets.NEXT_PUBLIC_SALEOR_API_URL }}
+            NEXT_PUBLIC_STOREFRONT_URL=${{ secrets.NEXT_PUBLIC_STOREFRONT_URL }}
 
       - name: Push to ghcr
         uses: redhat-actions/push-to-registry@v2

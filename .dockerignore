@@ -1,7 +1,11 @@
 Dockerfile
+Containerfile
 .dockerignore
+.containerignore
 node_modules
 npm-debug.log
 README.md
 .next
 .git
+compose.yml
+deployment/*

@@ -1,0 +1,77 @@
+services:
+  frontend:
+    image: ghcr.io/danielkinahan/ir-frontend:latest
+    container_name: ir-frontend
+    restart: always
+    networks:
+      - ir
+      - caddy
+  api:
+    image: ghcr.io/saleor/saleor:3.20
+    container_name: ir-backend
+    restart: always
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+      - redis
+    volumes:
+      # shared volume between worker and api for media
+      - ./media:/app/media
+    env_file:
+      - common.env
+      - backend.env
+      - api.env
+    networks:
+      - ir
+      - caddy
+
+  dashboard:
+    image: ghcr.io/saleor/saleor-dashboard:3.20
+    container_name: ir-dashboard
+    restart: always
+    networks:
+      - caddy
+
+  db:
+    image: docker.io/library/postgres:15-alpine
+    container_name: ir-db
+    restart: always
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./replica_user.sql:/docker-entrypoint-initdb.d/replica_user.sql
+    env_file:
+      - db.env
+    networks:
+      - ir
+
+  redis:
+    image: docker.io/library/redis:7-alpine
+    container_name: ir-redis
+    restart: always
+    volumes:
+      - ./redis:/data
+    networks:
+      - ir
+
+  worker:
+    image: ghcr.io/saleor/saleor:3.20
+    container_name: ir-worker
+    command: celery -A saleor --app=saleor.celeryconf:app worker --loglevel=info -B
+    restart: always
+    env_file:
+      - common.env
+      - backend.env
+    depends_on:
+      - redis
+    volumes:
+      # shared volume between worker and api for media
+      - ./media:/app/media
+    networks:
+      - ir
+
+networks:
+  ir:
+    name: ir
+  caddy:
+    external: true
