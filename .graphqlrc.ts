@@ -5,7 +5,7 @@ loadEnvConfig(process.cwd());
 
 let schemaUrl = process.env.NEXT_PUBLIC_SALEOR_API_URL;
 
-if (process.env.GITHUB_ACTIONS) {
+if (process.env.USE_SCHEMA_FILE == "True") {
 	schemaUrl = "schema.graphql";
 }
 
