@@ -1,16 +1,4 @@
 services:
-  # frontend:
-  #   container_name: ir-frontend
-  #   build:
-  #     dockerfile: Containerfile
-  #     args:
-  #       NEXT_PUBLIC_SALEOR_API_URL: ${NEXT_PUBLIC_SALEOR_API_URL}
-  #       NEXT_PUBLIC_STOREFRONT_URL: ${NEXT_PUBLIC_STOREFRONT_URL}
-  #   restart: always
-  #   ports:
-  #     - 3000:3000
-  #   networks:
-  #     - saleor-backend-tier
   api:
     image: ghcr.io/saleor/saleor:3.20
     container_name: ir-backend
@@ -19,8 +7,6 @@ services:
     restart: unless-stopped
     networks:
       - saleor-backend-tier
-    stdin_open: true
-    tty: true
     depends_on:
       - db
       - redis
@@ -28,13 +14,18 @@ services:
     volumes:
       # shared volume between worker and api for media
       - saleor-media:/app/media
-    env_file:
-      - common.env
-      - backend.env
     environment:
       - JAEGER_AGENT_HOST=jaeger
       - DASHBOARD_URL=http://localhost:9000/
       - ALLOWED_HOSTS=localhost,api
+      - HTTP_IP_FILTER_ENABLED=True
+      - HTTP_IP_FILTER_ALLOW_LOOPBACK_IPS=True
+      - DEFAULT_CHANNEL_SLUG=ca
+      - CELERY_BROKER_URL=redis://redis:6379/1
+      - DATABASE_URL=postgres://saleor:saleor@db/saleor
+      - DEFAULT_FROM_EMAIL=noreply@example.com
+      - EMAIL_URL=smtp://mailpit:1025
+      - SECRET_KEY=changeme
 
   dashboard:
     image: ghcr.io/saleor/saleor-dashboard:latest
@@ -44,7 +35,7 @@ services:
     restart: unless-stopped
 
   db:
-    image: library/postgres:15-alpine
+    image: docker.io/library/postgres:15-alpine
     container_name: ir-db
     ports:
       - 5432:5432
@@ -59,7 +50,7 @@ services:
       - POSTGRES_PASSWORD=saleor
 
   redis:
-    image: library/redis:7.0-alpine
+    image: docker.io/library/redis:7.0-alpine
     container_name: ir-redis
     ports:
       - 6379:6379
@@ -76,15 +67,21 @@ services:
     restart: unless-stopped
     networks:
       - saleor-backend-tier
-    env_file:
-      - common.env
-      - backend.env
     depends_on:
       - redis
       - mailpit
     volumes:
       # shared volume between worker and api for media
       - saleor-media:/app/media
+    environment:
+      - HTTP_IP_FILTER_ENABLED=True
+      - HTTP_IP_FILTER_ALLOW_LOOPBACK_IPS=True
+      - DEFAULT_CHANNEL_SLUG=ca
+      - CELERY_BROKER_URL=redis://redis:6379/1
+      - DATABASE_URL=postgres://saleor:saleor@db/saleor
+      - DEFAULT_FROM_EMAIL=noreply@example.com
+      - EMAIL_URL=smtp://mailpit:1025
+      - SECRET_KEY=changeme
 
   jaeger:
     image: jaegertracing/all-in-one
@@ -124,3 +121,4 @@ volumes:
 networks:
   saleor-backend-tier:
     driver: bridge
+    name: saleor-backend-tier
