@@ -1,8 +1,13 @@
 import edjsHTML from "editorjs-html";
 import xss from "xss";
 import { executeGraphQL } from "@/lib/graphql";
-import { PageGetBySlugDocument , ProductListByCollectionDocument } from "@/gql/graphql";
+import {
+	PageGetBySlugDocument,
+	ProductListByCollectionDocument,
+	ProductDetailsDocument,
+} from "@/gql/graphql";
 import { ProductList } from "@/ui/components/ProductList";
+import { CarouselWrapper } from "@/ui/components/CarouselWrapper";
 
 const parser = edjsHTML();
 
@@ -41,13 +46,24 @@ export default async function Home({ params }: { params: { channel: string } }) 
 		);
 	}
 
-	const { title, content } = page;
+	const { content } = page;
+	const { product } = await executeGraphQL(ProductDetailsDocument, {
+		variables: {
+			slug: "homepage",
+			channel: params.channel,
+		},
+		revalidate: 60,
+	});
+
+	if (!product) {
+		return "Create a product with slug homepage to view images on this page.";
+	}
 
 	const contentHtml = content ? parser.parse(JSON.parse(content)) : null;
 
 	return (
 		<div className="mx-auto max-w-7xl p-8 pb-16">
-			<h1 className="text-3xl font-semibold">{title}</h1>
+			<div>{product.media && <CarouselWrapper media={product.media} />}</div>
 			{contentHtml && (
 				<div className="prose">
 					{contentHtml.map((content) => (

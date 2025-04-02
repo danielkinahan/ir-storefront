@@ -2,7 +2,7 @@ name: Build and push Containerfile
 on:
   release:
     types: [published]
-  push:
+  # push:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
