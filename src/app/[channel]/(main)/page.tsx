@@ -62,8 +62,8 @@ export default async function Home({ params }: { params: { channel: string } }) 
 	const contentHtml = content ? parser.parse(JSON.parse(content)) : null;
 
 	return (
-		<div className="mx-auto max-w-7xl p-8 pb-16">
-			<div>{product.media && <CarouselWrapper media={product.media} />}</div>
+		<div className="mx-auto max-w-7xl p-8 pb-16 lg:max-w-4xl">
+			{product.media && <CarouselWrapper media={product.media} />}
 			{contentHtml && (
 				<div className="prose">
 					{contentHtml.map((content) => (
