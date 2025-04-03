@@ -2,6 +2,7 @@
 
 import React from "react";
 import Slider from "react-slick";
+import { CarouselPrevArrow, CarouselNextArrow } from "@/ui/atoms/CarouselArrows";
 
 export function CarouselWrapper({ media }: { media: Array<{ url: string; alt?: string | null }> }) {
 	const settings = {
@@ -9,7 +10,21 @@ export function CarouselWrapper({ media }: { media: Array<{ url: string; alt?: s
 		infinite: true,
 		speed: 400,
 		accessibility: true,
-		adaptiveHeight: true, // Not sure about this one
+		nextArrow: (
+			<CarouselNextArrow
+				onClick={function (): void {
+					throw new Error("Function not implemented.");
+				}}
+			/>
+		),
+		prevArrow: (
+			<CarouselPrevArrow
+				onClick={function (): void {
+					throw new Error("Function not implemented.");
+				}}
+			/>
+		),
+		// adaptiveHeight: true, // Not sure about this one
 	};
 	return (
 		<Slider {...settings}>

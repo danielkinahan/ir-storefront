@@ -5,17 +5,3 @@
 body {
 	overflow-x: hidden;
 }
-
-.slick-prev:before,
-.slick-next:before {
-	color: black;
-	font-family: inherit;
-}
-
-.slick-prev::before {
-	content: "<";
-}
-
-.slick-next::before {
-	content: ">";
-}
