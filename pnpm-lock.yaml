@@ -196,8 +196,8 @@ importers:
         specifier: 5.3.3
         version: 5.3.3
       wonka:
-        specifier: 6.3.4
-        version: 6.3.4
+        specifier: 6.3.5
+        version: 6.3.5
 
 packages:
 
@@ -1955,6 +1955,7 @@ packages:
   eslint@8.56.0:
     resolution: {integrity: sha512-Go19xM6T9puCOWntie1/P997aXxFsOi37JIHRWI514Hc6ZnaHGKY9xFhrU65RT6CcBEzZoGG1e6Nq+DT04ZtZQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -3670,8 +3671,8 @@ packages:
     engines: {node: '>= 8'}
     hasBin: true
 
-  wonka@6.3.4:
-    resolution: {integrity: sha512-CjpbqNtBGNAeyNS/9W6q3kSkKE52+FjIj7AkFlLr11s/VWGUu6a2CdYSdGxocIhIVjaW/zchesBQUKPVU69Cqg==}
+  wonka@6.3.5:
+    resolution: {integrity: sha512-SSil+ecw6B4/Dm7Pf2sAshKQ5hWFvfyGlfPbEd6A14dOH6VDjrmbY86u6nZvy9omGwwIPFR8V41+of1EezgoUw==}
 
   word-wrap@1.2.5:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
@@ -5133,7 +5134,7 @@ snapshots:
   '@urql/core@4.3.0(graphql@16.8.1)':
     dependencies:
       '@0no-co/graphql.web': 1.0.7(graphql@16.8.1)
-      wonka: 6.3.4
+      wonka: 6.3.5
     transitivePeerDependencies:
       - graphql
 
@@ -7751,7 +7752,7 @@ snapshots:
     dependencies:
       '@urql/core': 4.3.0(graphql@16.8.1)
       react: 18.2.0
-      wonka: 6.3.4
+      wonka: 6.3.5
     transitivePeerDependencies:
       - graphql
 
@@ -7828,7 +7829,7 @@ snapshots:
     dependencies:
       isexe: 2.0.0
 
-  wonka@6.3.4: {}
+  wonka@6.3.5: {}
 
   word-wrap@1.2.5: {}
 
