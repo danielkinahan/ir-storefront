@@ -24,7 +24,7 @@ export function ProductCarouselWrapper({ media }: { media: Array<{ url: string; 
 				}}
 			/>
 		),
-		// adaptiveHeight: true, // Not sure about this one
+		adaptiveHeight: true, // Not sure about this one
 	};
 	return (
 		<Slider {...settings}>
