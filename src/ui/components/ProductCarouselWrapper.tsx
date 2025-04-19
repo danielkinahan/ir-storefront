@@ -4,7 +4,7 @@ import React from "react";
 import Slider from "react-slick";
 import { CarouselPrevArrow, CarouselNextArrow } from "@/ui/atoms/CarouselArrows";
 
-export function CarouselWrapper({ media }: { media: Array<{ url: string; alt?: string | null }> }) {
+export function ProductCarouselWrapper({ media }: { media: Array<{ url: string; alt?: string | null }> }) {
 	const settings = {
 		dots: true,
 		infinite: true,

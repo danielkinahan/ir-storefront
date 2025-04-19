@@ -7,7 +7,7 @@ import {
 	ProductDetailsDocument,
 } from "@/gql/graphql";
 import { ProductList } from "@/ui/components/ProductList";
-import { CarouselWrapper } from "@/ui/components/CarouselWrapper";
+import { MainCarouselWrapper } from "@/ui/components/MainCarouselWrapper";
 
 const parser = edjsHTML();
 
@@ -62,8 +62,8 @@ export default async function Home({ params }: { params: { channel: string } }) 
 	const contentHtml = content ? parser.parse(JSON.parse(content)) : null;
 
 	return (
-		<div className="mx-auto max-w-7xl p-8 pb-16 lg:max-w-6xl">
-			{product.media && <CarouselWrapper media={product.media} />}
+		<div className="mx-auto pb-16 pt-16">
+			{product.media && <MainCarouselWrapper media={product.media} />}
 			{contentHtml && (
 				<div className="prose mt-[4em] max-w-none text-center">
 					{contentHtml.map((content) => (

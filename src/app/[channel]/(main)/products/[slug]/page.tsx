@@ -13,7 +13,7 @@ import { formatMoney, formatMoneyRange } from "@/lib/utils";
 import { CheckoutAddLineDocument, ProductDetailsDocument, ProductListDocument } from "@/gql/graphql";
 import * as Checkout from "@/lib/checkout";
 import { AvailabilityMessage } from "@/ui/components/AvailabilityMessage";
-import { CarouselWrapper } from "@/ui/components/CarouselWrapper";
+import { ProductCarouselWrapper } from "@/ui/components/ProductCarouselWrapper";
 
 export async function generateMetadata(
 	{
@@ -181,7 +181,7 @@ export default async function Page({
 			/>
 			<form className="grid gap-2 md:grid-cols-2 lg:grid-cols-8" action={addItem}>
 				<div className="min-h-0 min-w-0 md:hidden">
-					{product.media && <CarouselWrapper media={product.media} />}
+					{product.media && <ProductCarouselWrapper media={product.media} />}
 				</div>
 				<div className="hidden md:col-span-1 md:block lg:col-span-5">
 					{product.media?.map((image: { url: string; alt?: string | null }) => (
