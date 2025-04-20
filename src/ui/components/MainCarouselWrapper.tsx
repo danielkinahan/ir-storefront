@@ -1,61 +1,70 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
-import Slider from "react-slick";
 
 export function MainCarouselWrapper({ media }: { media: Array<{ url: string; alt?: string | null }> }) {
-	const sliderRef = useRef<Slider | null>(null);
-
-	const settings = {
-		dots: true,
-		infinite: false,
-		speed: 400,
-		accessibility: true,
-		slidesToShow: 1.5,
-		arrows: false,
-		draggable: true,
-		swipe: true,
-	};
+	const scrollContainerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		const carouselElement = document.querySelector(".carousel-wrapper");
-		if (!carouselElement) return;
+		const container = scrollContainerRef.current;
 
-		const handleWheel = (event: Event) => {
-			const wheelEvent = event as WheelEvent; // Cast the event to WheelEvent
-			if (!sliderRef.current) return;
+		const handleScroll = () => {
+			if (container) {
+				// Check if the user has scrolled to the end of the horizontal container
+				const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth;
 
-			// Prevent the default page scroll behavior
-			wheelEvent.preventDefault();
-
-			if (wheelEvent.deltaY > 0) {
-				// Scroll down, go to the next slide
-				sliderRef.current.slickNext();
-			} else {
-				// Scroll up, go to the previous slide
-				sliderRef.current.slickPrev();
+				if (isAtEnd) {
+					// Scroll the page to the bottom
+					window.scrollTo({
+						top: document.body.scrollHeight, // Scroll to the bottom of the page
+						behavior: "smooth",
+					});
+				} else if (container.scrollLeft === 0) {
+					// Scroll the page to the top
+					window.scrollTo({
+						top: 0, // Scroll to the top of the page
+						behavior: "smooth",
+					});
+				}
 			}
 		};
 
-		carouselElement.addEventListener("wheel", handleWheel, { passive: false });
+		const handleWheel = (event: WheelEvent) => {
+			if (container) {
+				// Prevent vertical scrolling and enable horizontal scrolling
+				event.preventDefault();
+				container.scrollBy({ left: event.deltaY * 3, behavior: "smooth" });
+			}
+		};
+
+		if (container) {
+			container.addEventListener("scroll", handleScroll);
+			container.addEventListener("wheel", handleWheel); // Add wheel event listener
+		}
 
 		return () => {
-			carouselElement.removeEventListener("wheel", handleWheel);
+			if (container) {
+				container.removeEventListener("scroll", handleScroll);
+				container.removeEventListener("wheel", handleWheel); // Clean up wheel event listener
+			}
 		};
 	}, []);
 
 	return (
-		<div className="carousel-wrapper">
-			<Slider ref={sliderRef} {...settings}>
+		<div
+			className="no-scrollbar relative overflow-x-auto scroll-smooth whitespace-nowrap"
+			ref={scrollContainerRef}
+		>
+			<div className="flex">
 				{media.map((image) => (
-					<div key={image.url} className="relative">
+					<div key={image.url} className="inline-block w-[calc(100%/1.5)] max-w-[66.67vw] flex-shrink-0">
 						<img src={image.url} alt={image.alt ?? ""} className="d-block w-100" />
 						<div>
 							<h3>{image.alt ?? "Slide"}</h3>
 						</div>
 					</div>
 				))}
-			</Slider>
+			</div>
 		</div>
 	);
 }
