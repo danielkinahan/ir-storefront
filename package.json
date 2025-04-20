@@ -43,7 +43,7 @@
 		"slick-carousel": "1.8.1",
 		"ts-invariant": "0.10.3",
 		"url-join": "5.0.0",
-		"urql": "4.0.6",
+		"urql": "4.0.7",
 		"xss": "1.0.15",
 		"yup": "1.6.1",
 		"zustand": "4.4.6"

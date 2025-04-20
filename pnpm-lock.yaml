@@ -22,7 +22,7 @@ importers:
         version: 1.7.18(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@saleor/auth-sdk':
         specifier: 1.0.1
-        version: 1.0.1(next@14.2.26(@babel/core@7.24.9)(@playwright/test@1.50.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(urql@4.0.6(graphql@16.8.1)(react@18.2.0))
+        version: 1.0.1(next@14.2.26(@babel/core@7.24.9)(@playwright/test@1.50.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(urql@4.0.7(graphql@16.8.1)(react@18.2.0))
       '@stripe/react-stripe-js':
         specifier: 2.6.2
         version: 2.6.2(@stripe/stripe-js@2.2.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -93,8 +93,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0
       urql:
-        specifier: 4.0.6
-        version: 4.0.6(graphql@16.8.1)(react@18.2.0)
+        specifier: 4.0.7
+        version: 4.0.7(graphql@16.8.1)(react@18.2.0)
       xss:
         specifier: 1.0.15
         version: 1.0.15
@@ -201,8 +201,8 @@ importers:
 
 packages:
 
-  '@0no-co/graphql.web@1.0.7':
-    resolution: {integrity: sha512-E3Qku4mTzdrlwVWGPxklDnME5ANrEGetvYw4i2GCRlppWXXE4QD66j7pwb8HelZwS6LnqEChhrSOGCXpbiu6MQ==}
+  '@0no-co/graphql.web@1.1.2':
+    resolution: {integrity: sha512-N2NGsU5FLBhT8NZ+3l2YrzZSHITjNXNuDhC4iDiikv0IujaJ0Xc6xIxQZ/Ek3Cb+rgPjnLHYyJm11tInuJn+cw==}
     peerDependencies:
       graphql: 16.8.1
     peerDependenciesMeta:
@@ -1296,8 +1296,8 @@ packages:
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
-  '@urql/core@4.3.0':
-    resolution: {integrity: sha512-wT+FeL8DG4x5o6RfHEnONNFVDM3616ouzATMYUClB6CB+iIu2mwfBKd7xSUxYOZmwtxna5/hDRQdMl3nbQZlnw==}
+  '@urql/core@5.1.1':
+    resolution: {integrity: sha512-aGh024z5v2oINGD/In6rAtVKTm4VmQ2TxKQBAtk2ZSME5dunZFcjltw4p5ENQg+5CBhZ3FHMzl0Oa+rwqiWqlg==}
 
   '@whatwg-node/events@0.0.3':
     resolution: {integrity: sha512-IqnKIDWfXBJkvy/k6tzskWTc2NK3LcqHlb+KHGCrjOCH4jfQckRX0NAiIcC/vIqQkzLYw2r2CTSwAxcrtcD6lA==}
@@ -3659,8 +3659,8 @@ packages:
   urlpattern-polyfill@8.0.2:
     resolution: {integrity: sha512-Qp95D4TPJl1kC9SKigDcqgyM2VDVO4RiJc2d4qe5GrYm+zbIQCWWKAFaJNQ4BhdFeDGwBmAxqJBwWSJDb9T3BQ==}
 
-  urql@4.0.6:
-    resolution: {integrity: sha512-meXJ2puOd64uCGKh7Fse2R7gPa8+ZpBOoA62jN7CPXXUt7SVZSdeXWSpB3HvlfzLUkEqsWbvshwrgeWRYNNGaQ==}
+  urql@4.0.7:
+    resolution: {integrity: sha512-wnOONtZoYEobmamM5ushUBGil6UCUPd7SH5uEAqsz5Y/qBV88/2QG6jq7v6xP+413x5Lqy0h0hCGRB0KIeG6Kg==}
     peerDependencies:
       react: '>= 16.8.0'
 
@@ -3816,7 +3816,7 @@ packages:
 
 snapshots:
 
-  '@0no-co/graphql.web@1.0.7(graphql@16.8.1)':
+  '@0no-co/graphql.web@1.1.2(graphql@16.8.1)':
     optionalDependencies:
       graphql: 16.8.1
 
@@ -5007,7 +5007,7 @@ snapshots:
 
   '@rushstack/eslint-patch@1.10.3': {}
 
-  '@saleor/auth-sdk@1.0.1(next@14.2.26(@babel/core@7.24.9)(@playwright/test@1.50.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(urql@4.0.6(graphql@16.8.1)(react@18.2.0))':
+  '@saleor/auth-sdk@1.0.1(next@14.2.26(@babel/core@7.24.9)(@playwright/test@1.50.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(urql@4.0.7(graphql@16.8.1)(react@18.2.0))':
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.1)
       cookie: 0.6.0
@@ -5016,7 +5016,7 @@ snapshots:
       next: 14.2.26(@babel/core@7.24.9)(@playwright/test@1.50.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      urql: 4.0.6(graphql@16.8.1)(react@18.2.0)
+      urql: 4.0.7(graphql@16.8.1)(react@18.2.0)
 
   '@stripe/react-stripe-js@2.6.2(@stripe/stripe-js@2.2.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
@@ -5202,9 +5202,9 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@urql/core@4.3.0(graphql@16.8.1)':
+  '@urql/core@5.1.1(graphql@16.8.1)':
     dependencies:
-      '@0no-co/graphql.web': 1.0.7(graphql@16.8.1)
+      '@0no-co/graphql.web': 1.1.2(graphql@16.8.1)
       wonka: 6.3.5
     transitivePeerDependencies:
       - graphql
@@ -7825,9 +7825,9 @@ snapshots:
 
   urlpattern-polyfill@8.0.2: {}
 
-  urql@4.0.6(graphql@16.8.1)(react@18.2.0):
+  urql@4.0.7(graphql@16.8.1)(react@18.2.0):
     dependencies:
-      '@urql/core': 4.3.0(graphql@16.8.1)
+      '@urql/core': 5.1.1(graphql@16.8.1)
       react: 18.2.0
       wonka: 6.3.5
     transitivePeerDependencies:
