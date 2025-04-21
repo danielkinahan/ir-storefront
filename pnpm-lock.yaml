@@ -124,8 +124,8 @@ importers:
         specifier: 1.50.1
         version: 1.50.1
       '@tailwindcss/forms':
-        specifier: 0.5.7
-        version: 0.5.7(tailwindcss@3.4.0)
+        specifier: 0.5.10
+        version: 0.5.10(tailwindcss@3.4.0)
       '@tailwindcss/typography':
         specifier: 0.5.10
         version: 0.5.10(tailwindcss@3.4.0)
@@ -201,8 +201,8 @@ importers:
 
 packages:
 
-  '@0no-co/graphql.web@1.0.7':
-    resolution: {integrity: sha512-E3Qku4mTzdrlwVWGPxklDnME5ANrEGetvYw4i2GCRlppWXXE4QD66j7pwb8HelZwS6LnqEChhrSOGCXpbiu6MQ==}
+  '@0no-co/graphql.web@1.1.2':
+    resolution: {integrity: sha512-N2NGsU5FLBhT8NZ+3l2YrzZSHITjNXNuDhC4iDiikv0IujaJ0Xc6xIxQZ/Ek3Cb+rgPjnLHYyJm11tInuJn+cw==}
     peerDependencies:
       graphql: 16.8.1
     peerDependenciesMeta:
@@ -1162,10 +1162,10 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.2.0'
 
-  '@tailwindcss/forms@0.5.7':
-    resolution: {integrity: sha512-QE7X69iQI+ZXwldE+rzasvbJiyV/ju1FGHH0Qn2W3FKbuYtqp8LKcy6iSw79fVUT5/Vvf+0XgLCeYVG+UV6hOw==}
+  '@tailwindcss/forms@0.5.10':
+    resolution: {integrity: sha512-utI1ONF6uf/pPNO68kmN1b8rEwNXv3czukalo8VtJH8ksIkZXr3Q3VYudZLkCsDd4Wku120uF02hYK25XGPorw==}
     peerDependencies:
-      tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
+      tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1 || >= 4.0.0-alpha.20 || >= 4.0.0-beta.1'
 
   '@tailwindcss/typography@0.5.10':
     resolution: {integrity: sha512-Pe8BuPJQJd3FfRnm6H0ulKIGoMEQS+Vq01R6M5aCrFB/ccR/shT+0kXLjouGC1gFLm9hopTFN+DMP0pfwRWzPw==}
@@ -3817,7 +3817,7 @@ packages:
 
 snapshots:
 
-  '@0no-co/graphql.web@1.0.7(graphql@16.8.1)':
+  '@0no-co/graphql.web@1.1.2(graphql@16.8.1)':
     optionalDependencies:
       graphql: 16.8.1
 
@@ -5039,7 +5039,7 @@ snapshots:
     dependencies:
       tailwindcss: 3.4.0
 
-  '@tailwindcss/forms@0.5.7(tailwindcss@3.4.0)':
+  '@tailwindcss/forms@0.5.10(tailwindcss@3.4.0)':
     dependencies:
       mini-svg-data-uri: 1.4.4
       tailwindcss: 3.4.0
@@ -5205,7 +5205,7 @@ snapshots:
 
   '@urql/core@5.1.1(graphql@16.8.1)':
     dependencies:
-      '@0no-co/graphql.web': 1.0.7(graphql@16.8.1)
+      '@0no-co/graphql.web': 1.1.2(graphql@16.8.1)
       wonka: 6.3.5
     transitivePeerDependencies:
       - graphql
